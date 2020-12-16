@@ -40,10 +40,10 @@ args = parser.parse_args()
 
 values = {"service": {"name": args.service_name, "replicaCount": args.replica_count, "image": {"name": args.image_name, "namespace": args.image_namespace}}}
 
-with open("service/values.yaml", "w") as output_file:
+with open("/service/values.yaml", "w") as output_file:
     yaml.dump(values, output_file)
 
-with open("service/Chart.yaml", "r+") as chart_file:
+with open("/service/Chart.yaml", "r+") as chart_file:
     yaml_file = yaml.full_load(chart_file)
     yaml_file["appVersion"] = args.image_version
     chart_file.seek(0)
