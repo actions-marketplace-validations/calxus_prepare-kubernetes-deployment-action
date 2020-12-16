@@ -1,5 +1,6 @@
 import argparse
 import yaml
+import json
 
 parser = argparse.ArgumentParser(
     description="Preparation of values file to deploy a kubernetes service."
@@ -36,14 +37,20 @@ parser.add_argument(
     help='The version of the image to deploy'
 )
 
+parser.add_argument(
+    "--service-envvars",
+    dest="service_envvars",
+    help='The environment variables that are deployed with the service'
+)
+
 args = parser.parse_args()
 
-values = {"service": {"name": args.service_name, "replicaCount": args.replica_count, "image": {"name": args.image_name, "namespace": args.image_namespace}}}
+values = {"service": {"name": args.service_name, "replicaCount": args.replica_count, "image": {"name": args.image_name, "namespace": args.image_namespace}, "env": json.loads(args.service_envvars)}}
 
-with open("/service/values.yaml", "w") as output_file:
+with open("service/values.yaml", "w") as output_file:
     yaml.dump(values, output_file)
 
-with open("/service/Chart.yaml", "r+") as chart_file:
+with open("service/Chart.yaml", "r+") as chart_file:
     yaml_file = yaml.full_load(chart_file)
     yaml_file["appVersion"] = args.image_version
     chart_file.seek(0)

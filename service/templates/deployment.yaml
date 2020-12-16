@@ -18,3 +18,10 @@ spec:
         - name: {{ .Values.service.name }}
           image: {{ .Values.service.image.namespace }}/{{ .Values.service.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: Always
+          {{- if .Values.service.env }}
+          env:
+            {{- range .Values.service.env }}
+            - name: {{ .name }}
+              value: {{ .value }}
+            {{- end }}
+          {{- end }}
