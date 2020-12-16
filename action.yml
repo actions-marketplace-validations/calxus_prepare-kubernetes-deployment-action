@@ -1,6 +1,10 @@
 name: "Prepare Kubernetes Deployment Action"
 description: "Action used to prepare the files necessary for a Kubernetes deployment"
 inputs:
+  DEBUG:
+    description: "Set to `true` to assist with debugging"
+    required: false
+    default: false
   SERVICE_NAME:
     description: "The name of the service to deploy"
     required: true
@@ -23,6 +27,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - ${{ inputs.DEBUG }}
     - ${{ inputs.SERVICE_NAME }}
     - ${{ inputs.SERVICE_REPLICA_COUNT }}
     - ${{ inputs.SERVICE_IMAGE_NAME }}
