@@ -6,3 +6,4 @@ if [ "$1" = true ] ; then
     cat /service/values.yaml
 fi
 cp -rp /service service
+echo "::set-output name=VERSION_NUMBER::$(cat release_version.txt)"
