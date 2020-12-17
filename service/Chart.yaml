@@ -2,4 +2,3 @@ apiVersion: v2
 name: service
 description: A Helm chart for a service in kubernetes
 type: application
-version: 0.1.0

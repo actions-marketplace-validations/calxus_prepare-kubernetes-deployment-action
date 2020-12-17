@@ -32,9 +32,9 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--image-version",
-    dest="image_version",
-    help='The version of the image to deploy'
+    "--version",
+    dest="version",
+    help='The version of the application to deploy'
 )
 
 parser.add_argument(
@@ -52,7 +52,8 @@ with open("/service/values.yaml", "w") as output_file:
 
 with open("/service/Chart.yaml", "r+") as chart_file:
     yaml_file = yaml.full_load(chart_file)
-    yaml_file["appVersion"] = args.image_version
+    yaml_file["appVersion"] = args.version
+    yaml_file["version"] = args.version
     chart_file.seek(0)
     chart_file.truncate()
     yaml.dump(yaml_file, chart_file)
