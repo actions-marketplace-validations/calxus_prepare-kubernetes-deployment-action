@@ -17,9 +17,6 @@ inputs:
   SERVICE_IMAGE_NAMESPACE:
     description: "The namespace of the image to deploy"
     required: true
-  SERVICE_IMAGE_VERSION:
-    description: "The version of the image to deploy"
-    required: true
   SERVICE_ENVVARS:
     description: "The environment variables that need to be passed to the service"
     required: true
@@ -32,5 +29,4 @@ runs:
     - ${{ inputs.SERVICE_REPLICA_COUNT }}
     - ${{ inputs.SERVICE_IMAGE_NAME }}
     - ${{ inputs.SERVICE_IMAGE_NAMESPACE }}
-    - ${{ inputs.SERVICE_IMAGE_VERSION }}
     - ${{ inputs.SERVICE_ENVVARS }}
