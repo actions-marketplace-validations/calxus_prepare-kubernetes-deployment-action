@@ -18,6 +18,13 @@ spec:
         - name: {{ .Values.service.name }}
           image: {{ .Values.service.image.namespace }}/{{ .Values.service.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "125m"
+            limits:
+              memory: "64Mi"
+              cpu: "125m"
           {{- if .Values.service.env }}
           env:
             {{- range .Values.service.env }}
